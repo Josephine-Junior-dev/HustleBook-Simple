@@ -1,7 +1,7 @@
 -- HustleBook Simple tables. These names are separate from Garage Operations Pro.
 -- Run this script in Supabase SQL Editor.
 create table if not exists public.hbs_stock (
-  id uuid primary key default gen_random_uuid(),
+  id text primary key,
   owner_id uuid not null references auth.users(id) on delete cascade,
   name text not null,
   qty numeric not null default 0 check (qty >= 0),
@@ -10,7 +10,7 @@ create table if not exists public.hbs_stock (
   created_at timestamptz not null default now()
 );
 create table if not exists public.hbs_sales (
-  id uuid primary key default gen_random_uuid(),
+  id text primary key,
   owner_id uuid not null references auth.users(id) on delete cascade,
   name text not null,
   qty numeric not null check (qty > 0),
@@ -23,7 +23,7 @@ create table if not exists public.hbs_sales (
   created_at timestamptz not null default now()
 );
 create table if not exists public.hbs_expenses (
-  id uuid primary key default gen_random_uuid(),
+  id text primary key,
   owner_id uuid not null references auth.users(id) on delete cascade,
   name text not null,
   amount numeric not null check (amount > 0),
@@ -33,7 +33,7 @@ create table if not exists public.hbs_expenses (
   created_at timestamptz not null default now()
 );
 create table if not exists public.hbs_suppliers (
-  id uuid primary key default gen_random_uuid(),
+  id text primary key,
   owner_id uuid not null references auth.users(id) on delete cascade,
   name text not null,
   created_at timestamptz not null default now()
