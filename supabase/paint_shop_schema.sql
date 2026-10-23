@@ -191,6 +191,11 @@ create policy hps_shops_owner_all on public.hps_shops
   for all to authenticated using (owner_id = (select auth.uid()))
   with check (owner_id = (select auth.uid()));
 
+-- The public catalogue may show active shop contact/location details only.
+drop policy if exists hps_shops_public_read on public.hps_shops;
+create policy hps_shops_public_read on public.hps_shops
+  for select to anon, authenticated using (is_active = true);
+
 drop policy if exists hps_suppliers_owner_all on public.hps_suppliers;
 create policy hps_suppliers_owner_all on public.hps_suppliers for all to authenticated
   using (exists (select 1 from public.hps_shops s where s.id = shop_id and s.owner_id = (select auth.uid())))
@@ -248,7 +253,7 @@ create policy hps_enquiries_owner_all on public.hps_marketplace_enquiries for al
   with check (exists (select 1 from public.hps_shops s where s.id = shop_id and s.owner_id = (select auth.uid())));
 
 grant usage on schema public to anon, authenticated;
-grant select on public.hps_products to anon;
+grant select on public.hps_products, public.hps_shops to anon;
 grant select, insert, update, delete on public.hps_shops, public.hps_suppliers, public.hps_products,
   public.hps_customers, public.hps_sales, public.hps_sale_items, public.hps_expenses,
   public.hps_purchases, public.hps_purchase_items, public.hps_stock_movements,
