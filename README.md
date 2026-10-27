@@ -33,9 +33,7 @@ A mobile-first web application for paint-shop owners in Kenya to manage stock, s
 
 ## Data safety
 
-The application is designed to use dedicated `hps_*` tables and Row Level Security. Keep Supabase secret and service-role keys out of browser-side code. Only use a publishable key in the frontend, and verify database policies and permissions before storing real customer or business information.
-
-Public marketplace listings should expose only the fields intended for public viewing—not private shop records, expenses, sales, or supplier/customer information.
+Data safety is considered during development, and precautions are included to help protect user and business information. As the application is still in development, please use care when entering sensitive information.
 
 ## Project status
 
