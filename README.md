@@ -1,28 +1,50 @@
 # Paint Shop Pro
 
-A mobile-first paint-shop stock, sales, purchasing, expense and marketplace application for small businesses in Kenya.
+A mobile-first web application for paint-shop owners in Kenya to manage stock, sales, purchases, expenses, suppliers, customers, and selected public marketplace listings.
 
-## Start here
-1. In Supabase SQL Editor, run `supabase/paint_shop_schema.sql` once.
-2. Enable Email/Password under Supabase Authentication.
-3. Open the site, create an account, confirm your email if prompted, then sign in.
-4. Create your shop profile. Add products, record purchases and sales, and publish selected products to the public marketplace.
+> **Live site:** [Open the deployed application](https://josephine-junior-dev.github.io/HustleBook-Simple/)
 
 ## Features
-- Secure account sign-in and shop profile
-- Paint product catalogue, brands, colours, sizes, quantities and low-stock alerts
-- Sales, payment balances, receipt numbers and stock deductions
+
+- Email/password account registration and sign-in
+- Shop profile and product catalogue
+- Product quantities and low-stock visibility
+- Sales recording, receipts, payment balances, and stock deductions
 - Purchases and stock additions
-- Supplier and customer directories
+- Supplier and customer records
 - Expense tracking and CSV export
-- Public marketplace catalogue showing only published products and selling prices
-- Responsive layout for Android phones and desktop browsers
+- Public marketplace for products intentionally published by the shop
+- Responsive interface for Android phones and desktop browsers
+
+## Technology
+
+- HTML
+- CSS
+- JavaScript
+- Supabase Authentication and database services
+- PostgreSQL with Row Level Security (RLS)
+- GitHub Pages for static hosting
+
+## Run the project
+
+1. Open the live site using the link above, or open this repository on GitHub.
+2. To run locally, download or clone the repository and open `index.html` in a browser. Because the application uses Supabase, database-backed features require the configured Supabase project and schema.
+3. Review the SQL setup file in `supabase/` before setting up a separate database.
 
 ## Data safety
-All business data uses the separate `hps_*` tables and Supabase Row Level Security. The browser uses only the project's publishable key; never put a Supabase secret/service-role key in frontend code. Public marketplace listings intentionally do not expose buying prices, sales, expenses, or customer records.
 
-## Deployment
-This repository is static HTML/CSS/JavaScript. It can be published with GitHub Pages or deployed to Vercel from the repository root. The public catalogue is `marketplace.html`.
+The application is designed to use dedicated `hps_*` tables and Row Level Security. Keep Supabase secret and service-role keys out of browser-side code. Only use a publishable key in the frontend, and verify database policies and permissions before storing real customer or business information.
 
-## Supabase
-Project URL is configured in `app.js` and `marketplace.js`. Schema file: `supabase/paint_shop_schema.sql`.
+Public marketplace listings should expose only the fields intended for public viewing—not private shop records, expenses, sales, or supplier/customer information.
+
+## Project status
+
+This is a project in development. The live link indicates that the site is deployed; it does not guarantee that every feature has been fully tested or is production-ready.
+
+## Maintainer
+
+Created by **Josephine Mueni** in Kenya.
+
+- [Developer portfolio](https://josephine-junior-dev.github.io/Josephine-Digital-Labs-Portfolio/)
+- [GitHub profile](https://github.com/Josephine-Junior-dev)
+
