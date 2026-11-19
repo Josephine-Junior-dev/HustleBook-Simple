@@ -1,6 +1,6 @@
 /* Public catalogue: only published active products; no buying prices or private records. */
 'use strict';
-const sb=window.supabase.createClient('https://ptluwoeogfkqavhspdjj.supabase.co','sb_publishable_wDsWINauH0jX9rezsEwczw_RovrM6Nv');
+const cfg=window.APP_CONFIG||{};if(!cfg.SUPABASE_URL||!cfg.SUPABASE_KEY)throw new Error('HustleBook config.js is missing Supabase settings.');const sb=window.supabase.createClient(cfg.SUPABASE_URL,cfg.SUPABASE_KEY);
 const $=id=>document.getElementById(id),money=n=>'KSh '+Number(n||0).toLocaleString('en-KE',{maximumFractionDigits:2}),esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 let items=[];
 async function load(){try{const {data,error}=await sb.from('hps_products').select('id,shop_id,product_name,brand,category,colour_name,colour_code,size_value,size_unit,stock_qty,selling_price,description,shop:hps_shops(shop_name,phone,whatsapp,location_text,is_active)').eq('is_published',true).eq('is_active',true).gt('stock_qty',0).order('product_name');if(error)throw error;items=(data||[]).filter(p=>p.shop&&p.shop.is_active);render()}catch(e){console.error(e);$('results').innerHTML='<div class="empty">Catalogue is temporarily unavailable. The shop owner may need to run the paint-shop database setup first.</div>'}}
